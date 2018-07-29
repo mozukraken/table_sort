@@ -15,8 +15,8 @@
       var col = this.cellIndex;
 
       rows.sort(function(a, b) {
-        var _a = a.children[col].textContent;
-        var _b = b.children[col].textContent;
+        var _a = a.children[col].textContent.toLowerCase();
+        var _b = b.children[col].textContent.toLowerCase();
 
         if (_a < _b) {
           return -1;
