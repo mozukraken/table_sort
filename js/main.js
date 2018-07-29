@@ -26,7 +26,16 @@
         }
         return 0; 
       });
-        console.log(rows);
+        // console.log(rows);
+
+        var tbody = document.querySelector('tbody');
+        while (tbody.firstChild) {
+          tbody.removeChild(tbody.firstChild);
+        }
+        var j;
+        for (j = 0; j < rows.length; j++){
+          tbody.appendChild(rows[j]);
+        }
     });
   }
 
