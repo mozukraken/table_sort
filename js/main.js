@@ -13,11 +13,18 @@
       var rows = Array.prototype.slice.call(document.querySelectorAll('tbody > tr'));
 
       var col = this.cellIndex;
+      var type = this.dataset.type;
 
       rows.sort(function(a, b) {
-        var _a = a.children[col].textContent.toLowerCase();
-        var _b = b.children[col].textContent.toLowerCase();
-
+        if (type === "number") {
+          var _a = a.children[col].textContent * 1;
+          var _b = b.children[col].textContent * 1;
+        }
+        if (type === "string") {
+          var _a = a.children[col].textContent.toLowerCase();
+          var _b = b.children[col].textContent.toLowerCase();
+        }
+        
         if (_a < _b) {
           return -1;
         }
