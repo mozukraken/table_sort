@@ -3,6 +3,7 @@
 
   var ths = document.getElementsByTagName('th');
   var i;
+  var sortOrder = 1;
 
   for (i = 0; i < ths.length; i++) {
     ths[i].addEventListener('click', function() {
@@ -26,10 +27,10 @@
         }
         
         if (_a < _b) {
-          return -1;
+          return -1 * sortOrder;
         }
         if (_a > _b) {
-          return 1;
+          return 1 * sortOrder;
         }
         return 0; 
       });
@@ -43,6 +44,13 @@
         for (j = 0; j < rows.length; j++){
           tbody.appendChild(rows[j]);
         }
+        var k;
+        for (k = 0; k < ths.length; k++){
+          ths[k].className = '';
+        }
+        this.className = sortOrder === 1 ? 'asc' : 'desc';
+
+        sortOrder *= -1;
     });
   }
 
