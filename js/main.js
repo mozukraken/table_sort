@@ -5,6 +5,25 @@
   var i;
   var sortOrder = 1;
 
+  function rebuildTbody(rows) {
+    var tbody = document.querySelector('tbody');
+    while (tbody.firstChild) {
+      tbody.removeChild(tbody.firstChild);
+    }
+    var i;
+    for (i = 0; i < rows.length; i++){
+      tbody.appendChild(rows[i]);
+    }
+  }
+
+  function updateClassName(th) {
+    var k;
+    for (k = 0; k < ths.length; k++){
+      ths[k].className = '';
+    }
+    th.className = sortOrder === 1 ? 'asc' : 'desc';
+  }
+
   for (i = 0; i < ths.length; i++) {
     ths[i].addEventListener('click', function() {
       // console.log(this.cellIndex);
@@ -35,21 +54,9 @@
         return 0; 
       });
         // console.log(rows);
-
-        var tbody = document.querySelector('tbody');
-        while (tbody.firstChild) {
-          tbody.removeChild(tbody.firstChild);
-        }
-        var j;
-        for (j = 0; j < rows.length; j++){
-          tbody.appendChild(rows[j]);
-        }
-        var k;
-        for (k = 0; k < ths.length; k++){
-          ths[k].className = '';
-        }
-        this.className = sortOrder === 1 ? 'asc' : 'desc';
-
+        rebuildTbody(rows);
+        updateClassName(this);
+      
         sortOrder *= -1;
     });
   }
