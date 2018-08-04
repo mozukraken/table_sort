@@ -24,6 +24,26 @@
     th.className = sortOrder === 1 ? 'asc' : 'desc';
   }
 
+  function compare(a, b, col, type) {
+    var _a = a.children[col].textContent;
+    var _b = b.children[col].textContent;
+    if (type === "number") {
+      _a = _a * 1;
+      _b = _b * 1;
+    } else if (type === "string") {
+      _a = _a.toLowerCase();
+      _b = _b.toLowerCase();
+    } 
+      
+    if (_a < _b) {
+      return -1;
+    }
+    if (_a > _b) {
+      return 1;
+    }
+    return 0; 
+  }
+
   for (i = 0; i < ths.length; i++) {
     ths[i].addEventListener('click', function() {
       // console.log(this.cellIndex);
@@ -36,22 +56,7 @@
       var type = this.dataset.type;
 
       rows.sort(function(a, b) {
-        if (type === "number") {
-          var _a = a.children[col].textContent * 1;
-          var _b = b.children[col].textContent * 1;
-        }
-        if (type === "string") {
-          var _a = a.children[col].textContent.toLowerCase();
-          var _b = b.children[col].textContent.toLowerCase();
-        }
-        
-        if (_a < _b) {
-          return -1 * sortOrder;
-        }
-        if (_a > _b) {
-          return 1 * sortOrder;
-        }
-        return 0; 
+        return compare(a, b, col, type) * sortOrder;
       });
         // console.log(rows);
         rebuildTbody(rows);
